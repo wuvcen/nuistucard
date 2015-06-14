@@ -20,12 +20,23 @@
     [dic writeToFile:[self getDirectory:@"Account.plist"] atomically:YES];
 }
 
++ (void)deleteAccount {
+    NSFileManager* manager = [NSFileManager defaultManager];
+    [manager removeItemAtPath:[self getDirectory:@"Account.plist"] error:nil];
+    
+}
+
 + (NSDictionary *)getInfo {
     return [NSDictionary dictionaryWithContentsOfFile:[self getDirectory:@"PersonInfo.plist"]];
 }
 
 + (void)setInfo:(NSDictionary *)info {
     [info writeToFile:[self getDirectory:@"PersonInfo.plist"] atomically:YES];
+}
+
++ (void)deleteInfo {
+    NSFileManager* manager = [NSFileManager defaultManager];
+    [manager removeItemAtPath:[self getDirectory:@"PersonInfo.plist"] error:nil];
 }
 
 + (NSString *)codeStringByBase64:(NSString *)stringToCode {

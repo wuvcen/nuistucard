@@ -16,11 +16,11 @@
 //}
 + (NSDictionary *)getAccount;
 + (void)saveAccount:(NSDictionary *)dic;
-
++ (void)deleteAccount;
 //个人信息
 + (NSDictionary *)getInfo;
 + (void)setInfo:(NSDictionary *)info;
-
++ (void)deleteInfo;
 //Base64编码工具
 + (NSString *)codeStringByBase64:(NSString *)stringToCode;
 

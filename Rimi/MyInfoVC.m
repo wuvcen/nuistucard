@@ -59,7 +59,15 @@
     UITableViewCell* cell;
     switch (indexPath.section) {
         case 0:
+
             cell = [tableView dequeueReusableCellWithIdentifier:@"personal"];
+            if ([DataUtils getInfo]!= nil) {
+                cell.textLabel.text = [[DataUtils getInfo] objectForKey:@"name"];
+                cell.detailTextLabel.text = [[DataUtils getInfo]objectForKey:@"snonum"];
+            }else {
+                cell.textLabel.text = @"姓名";
+                cell.detailTextLabel.text = @"学号";
+            }
             break;
         case 1:
             cell = [tableView dequeueReusableCellWithIdentifier:@"selections"];
@@ -100,15 +108,43 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0:
-            if (indexPath.row == 0) {
+            if (indexPath.row == 0 && ![self isLogin]) {
+                [self performSegueWithIdentifier:@"login" sender:nil];
+            }else{
+                [self performSegueWithIdentifier:@"detailinfo" sender:nil];
+            }
+            break;
+            case 1:
+            switch (indexPath.row) {
+                case 0:
+                    if ([self isLogin]) {
+                        [self performSegueWithIdentifier:@"transfer" sender:nil];
+                    }
+                    break;
+                    
+                default:
+                    break;
+            }
+            break;
+        case 2:
+            if ([self isLogin]) {
+                [DataUtils deleteAccount];
+                [DataUtils deleteInfo];
+                [self.tableView reloadData];
+                [self performSegueWithIdentifier:@"login" sender:nil];
+            }else{
+                [self.tableView reloadData];
                 [self performSegueWithIdentifier:@"login" sender:nil];
             }
             break;
-            
         default:
             break;
     }
 
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self.tableView reloadData];
+}
 @end
