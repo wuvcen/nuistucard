@@ -18,6 +18,10 @@
 		53341C361B2969190045D78C /* DataUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 53341C351B2969190045D78C /* DataUtils.m */; };
 		53341C3A1B2978970045D78C /* MyInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 53341C391B2978970045D78C /* MyInfoVC.m */; };
 		53341C3E1B2985E40045D78C /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 53341C3D1B2985E40045D78C /* LoginVC.m */; };
+		5352961A1B3EEC5F0061697B /* ConsumeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 535296131B3EEC5F0061697B /* ConsumeCell.m */; };
+		5352961B1B3EEC5F0061697B /* ConsumeTBVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 535296151B3EEC5F0061697B /* ConsumeTBVC.m */; };
+		5352961C1B3EEC5F0061697B /* ScoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 535296171B3EEC5F0061697B /* ScoreCell.m */; };
+		5352961D1B3EEC5F0061697B /* ScoreTBVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 535296191B3EEC5F0061697B /* ScoreTBVC.m */; };
 		D673DB7DC07679D31381DC24 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10494CD8C4B54F457B15C937 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +58,14 @@
 		53341C391B2978970045D78C /* MyInfoVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyInfoVC.m; sourceTree = "<group>"; };
 		53341C3C1B2985E40045D78C /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		53341C3D1B2985E40045D78C /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		535296121B3EEC5F0061697B /* ConsumeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsumeCell.h; sourceTree = "<group>"; };
+		535296131B3EEC5F0061697B /* ConsumeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsumeCell.m; sourceTree = "<group>"; };
+		535296141B3EEC5F0061697B /* ConsumeTBVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConsumeTBVC.h; sourceTree = "<group>"; };
+		535296151B3EEC5F0061697B /* ConsumeTBVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConsumeTBVC.m; sourceTree = "<group>"; };
+		535296161B3EEC5F0061697B /* ScoreCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreCell.h; sourceTree = "<group>"; };
+		535296171B3EEC5F0061697B /* ScoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCell.m; sourceTree = "<group>"; };
+		535296181B3EEC5F0061697B /* ScoreTBVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreTBVC.h; sourceTree = "<group>"; };
+		535296191B3EEC5F0061697B /* ScoreTBVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreTBVC.m; sourceTree = "<group>"; };
 		EEAE45018223D0D7BBE0FF7D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FB8265F3958626555BC7172F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -141,6 +153,12 @@
 		53341C371B2969220045D78C /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				535296121B3EEC5F0061697B /* ConsumeCell.h */,
+				535296131B3EEC5F0061697B /* ConsumeCell.m */,
+				535296161B3EEC5F0061697B /* ScoreCell.h */,
+				535296171B3EEC5F0061697B /* ScoreCell.m */,
+				535296181B3EEC5F0061697B /* ScoreTBVC.h */,
+				535296191B3EEC5F0061697B /* ScoreTBVC.m */,
 				53341C341B2969190045D78C /* DataUtils.h */,
 				53341C351B2969190045D78C /* DataUtils.m */,
 			);
@@ -150,6 +168,8 @@
 		53341C3B1B29789F0045D78C /* viewcontrollers */ = {
 			isa = PBXGroup;
 			children = (
+				535296141B3EEC5F0061697B /* ConsumeTBVC.h */,
+				535296151B3EEC5F0061697B /* ConsumeTBVC.m */,
 				53341C381B2978970045D78C /* MyInfoVC.h */,
 				53341C391B2978970045D78C /* MyInfoVC.m */,
 				53341C3C1B2985E40045D78C /* LoginVC.h */,
@@ -317,8 +337,12 @@
 			files = (
 				53341C3A1B2978970045D78C /* MyInfoVC.m in Sources */,
 				53341C361B2969190045D78C /* DataUtils.m in Sources */,
+				5352961B1B3EEC5F0061697B /* ConsumeTBVC.m in Sources */,
+				5352961D1B3EEC5F0061697B /* ScoreTBVC.m in Sources */,
+				5352961A1B3EEC5F0061697B /* ConsumeCell.m in Sources */,
 				53341C3E1B2985E40045D78C /* LoginVC.m in Sources */,
 				531212D31B29BDBF00756731 /* TransferVC.m in Sources */,
+				5352961C1B3EEC5F0061697B /* ScoreCell.m in Sources */,
 				53341C141B29687A0045D78C /* AppDelegate.m in Sources */,
 				53341C111B29687A0045D78C /* main.m in Sources */,
 				531212D01B29BD1F00756731 /* UserInfoVC.m in Sources */,

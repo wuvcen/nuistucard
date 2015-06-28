@@ -30,11 +30,7 @@
     [manger POST:@"http://shenjingstudio.com/ucard/SnoDetail.php" parameters:postdata success:
      ^(AFHTTPRequestOperation* operation,id response){
          if (response != nil && [[response objectForKey:@"status"] isEqualToString:@"OK"]) {
-             [hud removeFromSuperview];
-             for (NSString* key in response) {
-                 NSLog(@"%@,%@",key,[response objectForKey:key]);
-             }
-             
+             [hud removeFromSuperview];             
              self.currentGuo.text = [NSString stringWithFormat:@"%@",[response objectForKey:@"当前过度余额"]];
              self.lastGuo.text = [response objectForKey:@"上次过度余额"];
              self.guaShi.text = [NSString stringWithFormat:@"%@",[response objectForKey:@"挂失状态"]];

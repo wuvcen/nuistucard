@@ -46,7 +46,7 @@
         case 0:
             return 1;
         case 1:
-            return 3;
+            return 2;
         case 2:
             return 1;
         default:
@@ -76,9 +76,6 @@
                     cell.textLabel.text = @"转账充值";
                     break;
                 case 1:
-                    cell.textLabel.text = @"流水查询";
-                    break;
-                case 2:
                     cell.textLabel.text = @"成绩查询";
                     break;
                 default:
@@ -121,10 +118,16 @@
                         [self performSegueWithIdentifier:@"transfer" sender:nil];
                     }
                     break;
-                    
+                    case 1:
+                    if ([self isLogin]) {
+                        [self performSegueWithIdentifier:@"queryscore" sender:nil];
+                    }
+                    break;
                 default:
                     break;
             }
+            break;
+            
             break;
         case 2:
             if ([self isLogin]) {
@@ -146,5 +149,12 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.tableView reloadData];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    self.hidesBottomBarWhenPushed = YES;
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    self.hidesBottomBarWhenPushed = NO;
 }
 @end

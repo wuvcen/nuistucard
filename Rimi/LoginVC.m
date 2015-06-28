@@ -29,9 +29,10 @@
 }
 - (IBAction)loginBtn:(id)sender {
     MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    
+    __weak LoginVC *weakself = self;
     [self.txtNum resignFirstResponder];
     [self.txtPwd resignFirstResponder];
+    
     AFHTTPRequestOperationManager* manager = [AFHTTPRequestOperationManager manager];
     NSString* account = self.txtNum.text;
     NSString* password = [DataUtils codeStringByBase64:self.txtPwd.text];
@@ -44,7 +45,7 @@
             NSLog(@"登录成功");
             NSDictionary* info = @{@"name":[response objectForKey:@"姓名"],@"snonum":[response objectForKey:@"学工号"]};
             [DataUtils setInfo:info];
-            [self.navigationController popViewControllerAnimated:YES];
+            [weakself.navigationController popViewControllerAnimated:YES];
         }else{
             hud.mode = MBProgressHUDModeText;
             hud.labelText = @"登陆失败";
