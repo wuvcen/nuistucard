@@ -14,7 +14,7 @@
 @interface ScoreTBVC ()
 @property (strong, nonatomic) NSArray *cjArray;
 @property (assign, nonatomic) NSInteger pageIndex;
-@property (strong, nonatomic) MBProgressHUD *hud;
+@property (strong, nonatomic) UIBarButtonItem *hud;
 @end
 
 @implementation ScoreTBVC
@@ -73,30 +73,30 @@
     }
 }
 
-- (void)showProgressHUD {
-    
-    if (self.hud == nil) {
-        self.hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-    }else{
-        [self.view addSubview:self.hud];
-    }
-    
-}
-
-- (void)hideProgressHUD {
-    [self.hud removeFromSuperview];
-}
+//- (void)showProgressHUD {
+//    
+//    if (self.hud == nil) {
+//        UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+//        self.hud = [[UIBarButtonItem alloc] initWithCustomView:view];
+//        
+//    }
+//    self.navigationItem.rightBarButtonItem = self.hud;
+//}
+//
+//- (void)hideProgressHUD {
+//}
 
 - (void)getData:(NSInteger)pageIndex {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *account = [DataUtils getAccount];
     NSDictionary *postdata = @{@"StuNum":[account objectForKey:@"account"],@"Password":[account objectForKey:@"password"],@"pageIndex":[NSString stringWithFormat:@"%ld",(long)pageIndex]};
-    [self showProgressHUD];
+
     
     __weak ScoreTBVC *wself = self;
     [self.navigationItem.rightBarButtonItem setEnabled:NO];
     [manager POST:@"http://shenjingstudio.com/ucard/SnoScore.php" parameters:postdata success:^(AFHTTPRequestOperation *operation,id response){
-        [wself hideProgressHUD];
+        [hud removeFromSuperview];
         [wself.navigationItem.rightBarButtonItem setEnabled:YES];
         if (response != nil) {
             NSString *msg = [response objectForKey:@"msg"];
@@ -107,7 +107,7 @@
         }
     
     } failure:^(AFHTTPRequestOperation *operation,NSError *error){
-        [wself hideProgressHUD];
+        [hud removeFromSuperview];
         [wself.navigationItem.rightBarButtonItem setEnabled:YES];
     }];
 }

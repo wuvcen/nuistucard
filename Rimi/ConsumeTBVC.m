@@ -116,12 +116,13 @@
 }
 
 - (void)pullTorefresh {
+//    self.tableView.contentOffset = CGPointMake(0, 0);
     __weak ConsumeTBVC *wself = self;
     [UIView animateWithDuration:0.25
                           delay:0
                         options:UIViewAnimationOptionBeginFromCurrentState
                      animations:^(void){
-                         wself.tableView.contentOffset = CGPointMake(0, -wself.refreshControl.frame.size.height);
+                         wself.tableView.contentOffset = CGPointMake(0, wself.tableView.contentOffset.y-wself.refreshControl.frame.size.height);
                      } completion:^(BOOL finished){
                          [wself.refreshControl beginRefreshing];
                          [wself.refreshControl sendActionsForControlEvents:UIControlEventValueChanged];
