@@ -46,7 +46,7 @@
         case 0:
             return 1;
         case 1:
-            return 2;
+            return 3;
         case 2:
             return 1;
         default:
@@ -78,6 +78,8 @@
                 case 1:
                     cell.textLabel.text = @"成绩查询";
                     break;
+                    case 2:
+                    cell.textLabel.text = @"花销查询";
                 default:
                     break;
             }
@@ -121,6 +123,11 @@
                     case 1:
                     if ([self isLogin]) {
                         [self performSegueWithIdentifier:@"queryscore" sender:nil];
+                    }
+                    break;
+                    case 2:
+                    if ([self isLogin]) {
+                        [self performSegueWithIdentifier:@"queryconsume" sender:nil];
                     }
                     break;
                 default:

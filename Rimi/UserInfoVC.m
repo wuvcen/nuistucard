@@ -11,13 +11,8 @@
 #import "MBProgressHUD.h"
 #import "DataUtils.h"
 @interface UserInfoVC ()
-@property (weak, nonatomic) IBOutlet UILabel *yue;
-@property (weak, nonatomic) IBOutlet UILabel *bankNum;
-@property (weak, nonatomic) IBOutlet UILabel *currentGuo;
-@property (weak, nonatomic) IBOutlet UILabel *lastGuo;
-@property (weak, nonatomic) IBOutlet UILabel *guaShi;
 
-@property (weak, nonatomic) IBOutlet UILabel *dongJie;
+@property (strong, nonatomic) NSDictionary *data;
 @end
 
 @implementation UserInfoVC
@@ -27,16 +22,14 @@
     MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     AFHTTPRequestOperationManager* manger = [AFHTTPRequestOperationManager manager];
     NSDictionary* postdata = @{@"StuNum":[[DataUtils getAccount]objectForKey:@"account"],@"Password":[[DataUtils getAccount]objectForKey:@"password"]};
+    __weak UserInfoVC *wself = self;
     [manger POST:@"http://shenjingstudio.com/ucard/SnoDetail.php" parameters:postdata success:
      ^(AFHTTPRequestOperation* operation,id response){
          if (response != nil && [[response objectForKey:@"status"] isEqualToString:@"OK"]) {
-             [hud removeFromSuperview];             
-             self.currentGuo.text = [NSString stringWithFormat:@"%@",[response objectForKey:@"当前过度余额"]];
-             self.lastGuo.text = [response objectForKey:@"上次过度余额"];
-             self.guaShi.text = [NSString stringWithFormat:@"%@",[response objectForKey:@"挂失状态"]];
-             self.dongJie.text = [NSString stringWithFormat:@"%@",[response objectForKey:@"冻结状态"]];
-             self.yue.text = [response objectForKey:@"校园卡余额"];
-             self.bankNum.text = [response objectForKey:@"银行卡号"];
+             [hud removeFromSuperview];
+             wself.data = (NSDictionary *)response;
+
+             [wself.tableView reloadData];
          }else{
              hud.mode = MBProgressHUDModeText;
              hud.labelText = @"获取失败";
@@ -47,6 +40,8 @@
         hud.labelText = @"获取失败";
         [hud performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:2];
     }];
+    
+//    [self getiPlanet];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,6 +49,100 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)getiPlanet {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    AFHTTPRequestOperationManager* manger = [AFHTTPRequestOperationManager manager];
+    NSDictionary* postdata = @{@"StuNum":[[DataUtils getAccount]objectForKey:@"account"],@"Password":[[DataUtils getAccount]objectForKey:@"password"]};
+    __weak UserInfoVC *wself = self;
+    
+    [manger POST:@"http://shenjingstudio.com/ucard/SnoiPlanet.php" parameters:postdata success:
+     ^(AFHTTPRequestOperation* operation,id response){
+         if (response != nil) {
+             [hud removeFromSuperview];
+             NSLog(@"%@",[response objectForKey:@"msg"]);
+             [wself getPhoto:[response objectForKey:@"msg"]];
+         }else{
+             hud.mode = MBProgressHUDModeText;
+             hud.labelText = @"获取失败";
+             [hud performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:2];
+         }
+     } failure:^(AFHTTPRequestOperation* operation,NSError* error){
+         hud.mode = MBProgressHUDModeText;
+         hud.labelText = @"获取失败";
+         [hud performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:2];
+     }];
+    
+}
+
+- (void)getPhoto:(NSString *)iplanet {
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    AFHTTPRequestOperationManager* manger = [AFHTTPRequestOperationManager manager];
+    NSDictionary* postdata = @{@"iPlanetDirectoryPro":iplanet,@"sno":[[DataUtils getAccount]objectForKey:@"account"]};
+    
+    [manger POST:@"http://ucard.nuist.edu.cn:8070/Api/Card/GetMyPhoto" parameters:postdata success:
+     ^(AFHTTPRequestOperation* operation,id response){
+         NSLog(@"%@",response);
+         if (response != nil) {
+             [hud removeFromSuperview];
+             NSLog(@"%@",response);
+         }else{
+             hud.mode = MBProgressHUDModeText;
+             hud.labelText = @"获取失败";
+             [hud performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:2];
+         }
+     } failure:^(AFHTTPRequestOperation* operation,NSError* error){
+         hud.mode = MBProgressHUDModeText;
+         hud.labelText = @"获取失败";
+         [hud performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:2];
+     }];
+}
+- (NSString *)get:(NSString *)key {
+    if (self.data == nil) {
+        return @"";
+    }else{
+        return [self.data objectForKey:key];
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.data == nil) {
+        return 0;
+    }
+    return 6;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userinfocell"];
+    switch (indexPath.row) {
+        case 0:
+            cell.textLabel.text = @"余额";
+            cell.detailTextLabel.text = [self get:@"校园卡余额"];
+            break;
+            case 1:
+            cell.textLabel.text = @"银行卡号";
+            cell.detailTextLabel.text = [self get:@"银行卡号"];
+            break;
+            case 2:
+            cell.textLabel.text = @"当前过度余额";
+            cell.detailTextLabel.text = [self get:@"当前过度余额"];
+            break;
+            case 3:
+            cell.textLabel.text = @"上次过度余额";
+            cell.detailTextLabel.text = [self get:@"上次过度余额"];
+            break;
+            case 4:
+            cell.textLabel.text = @"挂失状态";
+            cell.detailTextLabel.text = [self get:@"挂失状态"];
+            break;
+            case 5:
+            cell.textLabel.text = @"冻结状态";
+            cell.detailTextLabel.text = [self get:@"冻结状态"];
+            break;
+        default:
+            break;
+    }
+    return cell;
+}
 /*
 #pragma mark - Navigation
 

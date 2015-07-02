@@ -24,9 +24,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self.typeSegment addTarget:self action:@selector(chooseSegment:) forControlEvents:UIControlEventValueChanged];
-    if ([self isLogin]) {
-        [self getData:@"Today"];
-    }
+    //    if ([self isLogin]) {
+    //        [self getData:@"Today"];
+    //    }
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.tintColor = [UIColor grayColor];
     self.refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"下拉刷新"];
@@ -35,17 +35,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    if (![self isLogin]) {
-        self.currentData = nil;
-        self.todayData = nil;
-        self.weekData = nil;
-        [self.tableView reloadData];
-    }else {
-        if (self.currentData == nil) {
-            [self pullTorefresh];
-            [self getData:@"Today"];
-            
-        }
+    
+    if (self.currentData == nil) {
+        [self pullTorefresh];
+        [self getData:@"Today"];
         
     }
 }
@@ -53,7 +46,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)refreshData {
@@ -135,6 +127,7 @@
                          [wself.refreshControl sendActionsForControlEvents:UIControlEventValueChanged];
                      }];
 }
+
 - (void)getData:(NSString *)queryType {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *account = [DataUtils getAccount];
@@ -153,10 +146,11 @@
                         wself.weekData = response[@"Array"];
                         wself.currentData = wself.weekData;
                     }
-                    [wself.refreshControl endRefreshing];
+                    
                     [wself.tableView reloadData];
                     
                 }
+                [wself.refreshControl endRefreshing];
             }
         } failure:^(AFHTTPRequestOperation *operation,NSError *error){
             [wself.refreshControl endRefreshing];

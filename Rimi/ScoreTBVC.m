@@ -68,7 +68,8 @@
     if (self.cjArray.count == 0 || self.cjArray == nil) {
         return @"";
     }else {
-        return [self.cjArray[0] objectForKey:@"XN"];
+        NSString *str = [NSString stringWithFormat:@"%@年 第%@学期",[self.cjArray[0] objectForKey:@"XN"],[self.cjArray[0] objectForKey:@"XQ"]];
+        return str;
     }
 }
 
@@ -89,12 +90,14 @@
 - (void)getData:(NSInteger)pageIndex {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *account = [DataUtils getAccount];
-    NSDictionary *postdata = @{@"StuNum":[account objectForKey:@"account"],@"Password":[account objectForKey:@"password"],@"pageIndex":[NSString stringWithFormat:@"%ld",pageIndex]};
+    NSDictionary *postdata = @{@"StuNum":[account objectForKey:@"account"],@"Password":[account objectForKey:@"password"],@"pageIndex":[NSString stringWithFormat:@"%ld",(long)pageIndex]};
     [self showProgressHUD];
     
     __weak ScoreTBVC *wself = self;
+    [self.navigationItem.rightBarButtonItem setEnabled:NO];
     [manager POST:@"http://shenjingstudio.com/ucard/SnoScore.php" parameters:postdata success:^(AFHTTPRequestOperation *operation,id response){
         [wself hideProgressHUD];
+        [wself.navigationItem.rightBarButtonItem setEnabled:YES];
         if (response != nil) {
             NSString *msg = [response objectForKey:@"msg"];
             if ([msg isEqual:[NSNull null]]) {
@@ -105,6 +108,7 @@
     
     } failure:^(AFHTTPRequestOperation *operation,NSError *error){
         [wself hideProgressHUD];
+        [wself.navigationItem.rightBarButtonItem setEnabled:YES];
     }];
 }
 @end
