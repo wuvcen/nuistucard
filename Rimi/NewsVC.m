@@ -11,6 +11,7 @@
 #import "NewsCell.h"
 #import <MJRefresh.h>
 #import <AFNetworking/AFNetworking.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
 
 @interface NewsVC () <UITableViewDataSource,UITableViewDelegate>
@@ -27,6 +28,7 @@
 @property (strong, nonatomic) NSArray *newsType;
 @property (strong, nonatomic) NSString *currentNews;
 @property (assign, nonatomic) NSUInteger currentPage;
+@property (strong, nonatomic) NSString *lastUpdate;
 @end
 
 
@@ -73,6 +75,11 @@
 
 - (void)handleTap {
     if (self.isSelectViewOpen) {
+        self.selectImg.image = [UIImage imageNamed:@"down4"];
+    }else {
+        self.selectImg.image = [UIImage imageNamed:@"up4"];
+    }
+    if (self.isSelectViewOpen) {
         [self hideSelectView:!self.isSelectViewOpen];
     }
 }
@@ -102,14 +109,20 @@
     [manager POST:@"http://shenjingstudio.com/ucard/CSNews.php" parameters:postData success:^(AFHTTPRequestOperation *opeation, id response){
         if (response) {
             if ([response[@"status"] isEqualToString:@"OK"]) {
-                self.tableData = [NSMutableArray arrayWithArray:response[@"Array"]];
-                [self.tableView reloadData];
+                if (![[[response[@"Array"] objectAtIndex:0] objectForKey:@"title"] isEqualToString:self.lastUpdate]) {
+                    self.tableData = [NSMutableArray arrayWithArray:response[@"Array"]];
+                    [self.tableView reloadData];
+                    self.lastUpdate = [[response[@"Array"] objectAtIndex:0] objectForKey:@"title"];
+                }else {
+                    [self showHudWithTitle:@"本栏目没有更新"];
+                }
+                
             }
         }
         [self.tableView.header endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error){
         [self.tableView.header endRefreshing];
-        
+        [self showHudWithTitle:@"获取失败"];
     }];
 }
 
@@ -122,20 +135,33 @@
     [manager POST:@"http://shenjingstudio.com/ucard/CSNews.php" parameters:postData success:^(AFHTTPRequestOperation *opeation, id response){
         if (response) {
             if ([response[@"status"] isEqualToString:@"OK"]) {
-                if (self.tableData) {
-                    [self.tableData addObjectsFromArray:response[@"Array"]];
+                if ([response[@"Array"] count] == 0) {
+                    [self showHudWithTitle:@"没有更多数据了"];
                 }else {
-                    self.tableData = response[@"Array"];
+                    if (self.tableData) {
+                        [self.tableData addObjectsFromArray:response[@"Array"]];
+                    }else {
+                        self.tableData = response[@"Array"];
+                    }
+                    [self.tableView reloadData];
                 }
-                [self.tableView reloadData];
             }
         }
         [self.tableView.footer endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation,NSError *error){
         [self.tableView.footer endRefreshing];
-        
+        [self showHudWithTitle:@"获取失败"];
     }];
+    
+}
 
+- (void)showHudWithTitle:(NSString *)title {
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithWindow:[UIApplication sharedApplication].keyWindow];
+    hud.mode = MBProgressHUDModeText;
+    hud.labelText = title;
+    [[UIApplication sharedApplication].keyWindow addSubview:hud];
+    [hud show:YES];
+    [hud performSelector:@selector(removeFromSuperview) withObject:nil afterDelay:1.5];
 }
 #pragma mark lazyload
 
