@@ -8,7 +8,7 @@
 
 #import "MyInfoVC.h"
 #import "DataUtils.h"
-@interface MyInfoVC ()
+@interface MyInfoVC () <UIAlertViewDelegate>
 
 @end
 
@@ -38,7 +38,7 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -48,6 +48,8 @@
         case 1:
             return 3;
         case 2:
+            return 1;
+        case 3:
             return 1;
         default:
             return 0;
@@ -59,7 +61,7 @@
     UITableViewCell* cell;
     switch (indexPath.section) {
         case 0:
-
+            
             cell = [tableView dequeueReusableCellWithIdentifier:@"personal"];
             if ([DataUtils getInfo]!= nil) {
                 cell.textLabel.text = [[DataUtils getInfo] objectForKey:@"name"];
@@ -78,13 +80,16 @@
                 case 1:
                     cell.textLabel.text = @"成绩查询";
                     break;
-                    case 2:
+                case 2:
                     cell.textLabel.text = @"花销查询";
                 default:
                     break;
             }
             break;
         case 2:
+            cell = [tableView dequeueReusableCellWithIdentifier:@"about"];
+            break;
+        case 3:
             if ([self isLogin]) {
                 cell = [tableView dequeueReusableCellWithIdentifier:@"settings"];
             }else{
@@ -113,22 +118,30 @@
                 [self performSegueWithIdentifier:@"detailinfo" sender:nil];
             }
             break;
-            case 1:
+        case 1:
             switch (indexPath.row) {
                 case 0:
                     if ([self isLogin]) {
                         [self performSegueWithIdentifier:@"transfer" sender:nil];
+                    }else {
+                        [self performSegueWithIdentifier:@"login" sender:nil];
                     }
                     break;
-                    case 1:
+                case 1:
                     if ([self isLogin]) {
                         [self performSegueWithIdentifier:@"queryscore" sender:nil];
+                    }else {
+                        [self performSegueWithIdentifier:@"login" sender:nil];
                     }
+
                     break;
-                    case 2:
+                case 2:
                     if ([self isLogin]) {
                         [self performSegueWithIdentifier:@"queryconsume" sender:nil];
+                    }else {
+                        [self performSegueWithIdentifier:@"login" sender:nil];
                     }
+
                     break;
                 default:
                     break;
@@ -137,11 +150,14 @@
             
             break;
         case 2:
+            //跳转到设置
+            [self performSegueWithIdentifier:@"showset" sender:nil];
+            break;
+        case 3:
             if ([self isLogin]) {
-                [DataUtils deleteAccount];
-                [DataUtils deleteInfo];
-                [self.tableView reloadData];
-                [self performSegueWithIdentifier:@"login" sender:nil];
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"确定退出？" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+                [alert show];
+                
             }else{
                 [self.tableView reloadData];
                 [self performSegueWithIdentifier:@"login" sender:nil];
@@ -150,18 +166,29 @@
         default:
             break;
     }
-
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+//    self.hidesBottomBarWhenPushed = NO;
     [self.tableView reloadData];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    self.hidesBottomBarWhenPushed = YES;
+//    self.hidesBottomBarWhenPushed = YES;
 }
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
     self.hidesBottomBarWhenPushed = NO;
+}
+
+#pragma mark UIAlertView Delegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        [DataUtils deleteAccount];
+        [DataUtils deleteInfo];
+    }
+        [self.tableView reloadData];
 }
 @end

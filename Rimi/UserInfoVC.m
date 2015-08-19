@@ -75,7 +75,7 @@
 }
 
 - (void)getPhoto:(NSString *)iplanet {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
     AFHTTPRequestOperationManager* manger = [AFHTTPRequestOperationManager manager];
     NSDictionary* postdata = @{@"iPlanetDirectoryPro":iplanet,@"sno":[[DataUtils getAccount]objectForKey:@"account"]};
     

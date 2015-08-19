@@ -11,7 +11,8 @@
 #import "MBProgressHUD.h"
 #import "AFNetworking.h"
 #import "DataUtils.h"
-@interface ScoreTBVC ()
+#import "UIScrollView+EmptyDataSet.h"
+@interface ScoreTBVC () <DZNEmptyDataSetSource>
 @property (strong, nonatomic) NSArray *cjArray;
 @property (assign, nonatomic) NSInteger pageIndex;
 @property (strong, nonatomic) UIBarButtonItem *hud;
@@ -25,6 +26,8 @@
     [self getData:self.pageIndex];
     UIBarButtonItem *right = [[UIBarButtonItem alloc] initWithTitle:@"下一页" style:UIBarButtonItemStylePlain target:self action:@selector(nextPage)];
     self.navigationItem.rightBarButtonItem = right;
+    self.tableView.emptyDataSetSource = self;
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,6 +49,7 @@
         return self.cjArray.count;
 
     }
+
     return 0;
 }
 
@@ -73,21 +77,12 @@
     }
 }
 
-//- (void)showProgressHUD {
-//    
-//    if (self.hud == nil) {
-//        UIActivityIndicatorView *view = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//        self.hud = [[UIBarButtonItem alloc] initWithCustomView:view];
-//        
-//    }
-//    self.navigationItem.rightBarButtonItem = self.hud;
-//}
-//
-//- (void)hideProgressHUD {
-//}
+
 
 - (void)getData:(NSInteger)pageIndex {
-    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    MBProgressHUD *hud = [[MBProgressHUD alloc] initWithWindow:[UIApplication sharedApplication].keyWindow];
+    [[UIApplication sharedApplication].keyWindow addSubview:hud];
+    [hud show:YES];
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *account = [DataUtils getAccount];
     NSDictionary *postdata = @{@"StuNum":[account objectForKey:@"account"],@"Password":[account objectForKey:@"password"],@"pageIndex":[NSString stringWithFormat:@"%ld",(long)pageIndex]};
@@ -110,5 +105,12 @@
         [hud removeFromSuperview];
         [wself.navigationItem.rightBarButtonItem setEnabled:YES];
     }];
+}
+
+#pragma mark DZEmptyDataSet datasource
+
+- (NSAttributedString *)titleForEmptyDataSet:(UIScrollView *)scrollView {
+    NSDictionary *attributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:18],NSForegroundColorAttributeName:[UIColor darkGrayColor]};
+    return [[NSAttributedString alloc] initWithString:@"没有数据" attributes:attributes];
 }
 @end

@@ -22,6 +22,11 @@
 		5352961B1B3EEC5F0061697B /* ConsumeTBVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 535296151B3EEC5F0061697B /* ConsumeTBVC.m */; };
 		5352961C1B3EEC5F0061697B /* ScoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 535296171B3EEC5F0061697B /* ScoreCell.m */; };
 		5352961D1B3EEC5F0061697B /* ScoreTBVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 535296191B3EEC5F0061697B /* ScoreTBVC.m */; };
+		53E11D9F1B8433BB00461F20 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E11D9E1B8433BB00461F20 /* UIScrollView+EmptyDataSet.m */; };
+		53E11DA31B8464F500461F20 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E11DA21B8464F500461F20 /* UINavigationController+FDFullscreenPopGesture.m */; };
+		53E11DA61B84650500461F20 /* NewsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E11DA51B84650500461F20 /* NewsVC.m */; };
+		53E11DAA1B84755E00461F20 /* NewsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E11DA81B84755E00461F20 /* NewsCell.m */; };
+		53E11DAB1B84755E00461F20 /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53E11DA91B84755E00461F20 /* NewsCell.xib */; };
 		D673DB7DC07679D31381DC24 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 10494CD8C4B54F457B15C937 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -66,6 +71,15 @@
 		535296171B3EEC5F0061697B /* ScoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCell.m; sourceTree = "<group>"; };
 		535296181B3EEC5F0061697B /* ScoreTBVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreTBVC.h; sourceTree = "<group>"; };
 		535296191B3EEC5F0061697B /* ScoreTBVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreTBVC.m; sourceTree = "<group>"; };
+		53E11D9D1B8433BB00461F20 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
+		53E11D9E1B8433BB00461F20 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
+		53E11DA11B8464F500461F20 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
+		53E11DA21B8464F500461F20 /* UINavigationController+FDFullscreenPopGesture.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+FDFullscreenPopGesture.m"; sourceTree = "<group>"; };
+		53E11DA41B84650500461F20 /* NewsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsVC.h; sourceTree = "<group>"; };
+		53E11DA51B84650500461F20 /* NewsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsVC.m; sourceTree = "<group>"; };
+		53E11DA71B84755E00461F20 /* NewsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsCell.h; sourceTree = "<group>"; };
+		53E11DA81B84755E00461F20 /* NewsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsCell.m; sourceTree = "<group>"; };
+		53E11DA91B84755E00461F20 /* NewsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
 		EEAE45018223D0D7BBE0FF7D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		FB8265F3958626555BC7172F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,6 +126,7 @@
 		53341C0D1B2968790045D78C /* Rimi */ = {
 			isa = PBXGroup;
 			children = (
+				53E11DA01B8433C100461F20 /* thirdParty */,
 				53341C121B29687A0045D78C /* AppDelegate.h */,
 				53341C131B29687A0045D78C /* AppDelegate.m */,
 				53341C181B29687A0045D78C /* Main.storyboard */,
@@ -120,6 +135,7 @@
 				53341C0E1B2968790045D78C /* Supporting Files */,
 				53341C371B2969220045D78C /* utils */,
 				53341C3B1B29789F0045D78C /* viewcontrollers */,
+				53E11DAC1B84756300461F20 /* classes */,
 			);
 			path = Rimi;
 			sourceTree = "<group>";
@@ -178,8 +194,31 @@
 				531212D21B29BDBF00756731 /* TransferVC.m */,
 				535296181B3EEC5F0061697B /* ScoreTBVC.h */,
 				535296191B3EEC5F0061697B /* ScoreTBVC.m */,
+				53E11DA41B84650500461F20 /* NewsVC.h */,
+				53E11DA51B84650500461F20 /* NewsVC.m */,
 			);
 			name = viewcontrollers;
+			sourceTree = "<group>";
+		};
+		53E11DA01B8433C100461F20 /* thirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				53E11DA11B8464F500461F20 /* UINavigationController+FDFullscreenPopGesture.h */,
+				53E11DA21B8464F500461F20 /* UINavigationController+FDFullscreenPopGesture.m */,
+				53E11D9D1B8433BB00461F20 /* UIScrollView+EmptyDataSet.h */,
+				53E11D9E1B8433BB00461F20 /* UIScrollView+EmptyDataSet.m */,
+			);
+			name = thirdParty;
+			sourceTree = "<group>";
+		};
+		53E11DAC1B84756300461F20 /* classes */ = {
+			isa = PBXGroup;
+			children = (
+				53E11DA71B84755E00461F20 /* NewsCell.h */,
+				53E11DA81B84755E00461F20 /* NewsCell.m */,
+				53E11DA91B84755E00461F20 /* NewsCell.xib */,
+			);
+			name = classes;
 			sourceTree = "<group>";
 		};
 		9D19D584B4DDAB34C6BB2713 /* Frameworks */ = {
@@ -284,6 +323,7 @@
 			files = (
 				53341C1A1B29687A0045D78C /* Main.storyboard in Resources */,
 				53341C1F1B29687A0045D78C /* LaunchScreen.xib in Resources */,
+				53E11DAB1B84755E00461F20 /* NewsCell.xib in Resources */,
 				53341C1C1B29687A0045D78C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -340,12 +380,16 @@
 				5352961B1B3EEC5F0061697B /* ConsumeTBVC.m in Sources */,
 				5352961D1B3EEC5F0061697B /* ScoreTBVC.m in Sources */,
 				5352961A1B3EEC5F0061697B /* ConsumeCell.m in Sources */,
+				53E11DA61B84650500461F20 /* NewsVC.m in Sources */,
 				53341C3E1B2985E40045D78C /* LoginVC.m in Sources */,
 				531212D31B29BDBF00756731 /* TransferVC.m in Sources */,
+				53E11DAA1B84755E00461F20 /* NewsCell.m in Sources */,
 				5352961C1B3EEC5F0061697B /* ScoreCell.m in Sources */,
 				53341C141B29687A0045D78C /* AppDelegate.m in Sources */,
 				53341C111B29687A0045D78C /* main.m in Sources */,
+				53E11D9F1B8433BB00461F20 /* UIScrollView+EmptyDataSet.m in Sources */,
 				531212D01B29BD1F00756731 /* UserInfoVC.m in Sources */,
+				53E11DA31B8464F500461F20 /* UINavigationController+FDFullscreenPopGesture.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,7 +467,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -460,7 +504,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -472,7 +516,6 @@
 			baseConfigurationReference = EEAE45018223D0D7BBE0FF7D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Rimi/Info.plist;
@@ -488,7 +531,6 @@
 			baseConfigurationReference = FB8265F3958626555BC7172F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "LaunchImage-2";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Rimi/Info.plist;

@@ -49,4 +49,11 @@
     NSString* directory = [path lastObject];
     return [directory stringByAppendingPathComponent:fielName];
 }
+
++ (BOOL)isLogin {
+    if ([self getAccount] == nil) {
+        return NO;
+    }
+    return YES;
+}
 @end

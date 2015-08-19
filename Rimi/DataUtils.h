@@ -25,4 +25,6 @@
 + (NSString *)codeStringByBase64:(NSString *)stringToCode;
 
 + (NSString *)getDirectory:(NSString *)fielName;
+
++ (BOOL)isLogin;
 @end

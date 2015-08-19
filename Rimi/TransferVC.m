@@ -13,20 +13,38 @@
 @interface TransferVC ()
 @property (weak, nonatomic) IBOutlet UITextField *txtSum;
 @property (weak, nonatomic) IBOutlet UITextField *txtPwd;
+@property (weak, nonatomic) IBOutlet UIButton *transferBtn;
+@property (weak, nonatomic) IBOutlet UIView *passwordView;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *transferBtnTopConstant;
 @end
 
 @implementation TransferVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.transferBtn.layer.cornerRadius = 4;
+    self.transferBtn.layer.borderColor = self.navigationController.navigationBar.barTintColor.CGColor;
+    self.transferBtn.layer.borderWidth = 1;
+    self.transferBtn.clipsToBounds = YES;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
+- (void)hidePwdView {
+    self.passwordView.hidden = YES;
+    self.transferBtnTopConstant.constant -= 52;
+    [self.transferBtn layoutIfNeeded];
+}
+
+- (void)showPwdView {
+    self.passwordView.hidden = NO;
+    self.transferBtnTopConstant.constant = 32;
+    [self.transferBtn layoutIfNeeded];
+}
+
 - (IBAction)btnClick:(id)sender {
     MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [self.txtSum resignFirstResponder];

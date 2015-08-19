@@ -13,6 +13,7 @@
 @interface LoginVC ()
 @property (weak, nonatomic) IBOutlet UITextField *txtNum;
 @property (weak, nonatomic) IBOutlet UITextField *txtPwd;
+@property (weak, nonatomic) IBOutlet UIButton *loginBtn;
 
 @end
 
@@ -20,13 +21,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.loginBtn.layer.cornerRadius = 4;
+    self.loginBtn.layer.borderColor = [self.navigationController.navigationBar barTintColor].CGColor;
+    self.loginBtn.layer.borderWidth = 1;
+    self.loginBtn.clipsToBounds = YES;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)loginBtn:(id)sender {
     MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     __weak LoginVC *weakself = self;
