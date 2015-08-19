@@ -22,6 +22,7 @@
 		5352961B1B3EEC5F0061697B /* ConsumeTBVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 535296151B3EEC5F0061697B /* ConsumeTBVC.m */; };
 		5352961C1B3EEC5F0061697B /* ScoreCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 535296171B3EEC5F0061697B /* ScoreCell.m */; };
 		5352961D1B3EEC5F0061697B /* ScoreTBVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 535296191B3EEC5F0061697B /* ScoreTBVC.m */; };
+		53C6989E1B84A55300111D21 /* NewsDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 53C6989D1B84A55300111D21 /* NewsDetailVC.m */; };
 		53E11D9F1B8433BB00461F20 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E11D9E1B8433BB00461F20 /* UIScrollView+EmptyDataSet.m */; };
 		53E11DA31B8464F500461F20 /* UINavigationController+FDFullscreenPopGesture.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E11DA21B8464F500461F20 /* UINavigationController+FDFullscreenPopGesture.m */; };
 		53E11DA61B84650500461F20 /* NewsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E11DA51B84650500461F20 /* NewsVC.m */; };
@@ -71,6 +72,8 @@
 		535296171B3EEC5F0061697B /* ScoreCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreCell.m; sourceTree = "<group>"; };
 		535296181B3EEC5F0061697B /* ScoreTBVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreTBVC.h; sourceTree = "<group>"; };
 		535296191B3EEC5F0061697B /* ScoreTBVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreTBVC.m; sourceTree = "<group>"; };
+		53C6989C1B84A55300111D21 /* NewsDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsDetailVC.h; sourceTree = "<group>"; };
+		53C6989D1B84A55300111D21 /* NewsDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsDetailVC.m; sourceTree = "<group>"; };
 		53E11D9D1B8433BB00461F20 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		53E11D9E1B8433BB00461F20 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
 		53E11DA11B8464F500461F20 /* UINavigationController+FDFullscreenPopGesture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+FDFullscreenPopGesture.h"; sourceTree = "<group>"; };
@@ -196,6 +199,8 @@
 				535296191B3EEC5F0061697B /* ScoreTBVC.m */,
 				53E11DA41B84650500461F20 /* NewsVC.h */,
 				53E11DA51B84650500461F20 /* NewsVC.m */,
+				53C6989C1B84A55300111D21 /* NewsDetailVC.h */,
+				53C6989D1B84A55300111D21 /* NewsDetailVC.m */,
 			);
 			name = viewcontrollers;
 			sourceTree = "<group>";
@@ -377,6 +382,7 @@
 			files = (
 				53341C3A1B2978970045D78C /* MyInfoVC.m in Sources */,
 				53341C361B2969190045D78C /* DataUtils.m in Sources */,
+				53C6989E1B84A55300111D21 /* NewsDetailVC.m in Sources */,
 				5352961B1B3EEC5F0061697B /* ConsumeTBVC.m in Sources */,
 				5352961D1B3EEC5F0061697B /* ScoreTBVC.m in Sources */,
 				5352961A1B3EEC5F0061697B /* ConsumeCell.m in Sources */,

@@ -29,6 +29,7 @@
 @property (strong, nonatomic) NSString *currentNews;
 @property (assign, nonatomic) NSUInteger currentPage;
 @property (strong, nonatomic) NSString *lastUpdate;
+@property (strong, nonatomic) UIView *coverView;
 @end
 
 
@@ -41,7 +42,8 @@
     self.navigationController.navigationBarHidden = YES;
     self.selectView.layer.cornerRadius = 2;
     self.selectView.clipsToBounds = YES;
-    [self.tableView addGestureRecognizer:self.tapGesture];
+    //    [self.tableView addGestureRecognizer:self.tapGesture];
+    self.fd_prefersNavigationBarHidden = YES;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -56,6 +58,12 @@
 }
 
 - (void)hideSelectView:(BOOL)isHide {
+    if (isHide) {
+        [self.coverView addGestureRecognizer:self.tapGesture];
+        [self.tableView addSubview:self.coverView];
+    }else {
+        [self.coverView removeFromSuperview];
+    }
     [UIView animateWithDuration:1 animations:^{
         self.selectView.hidden = !isHide;
     }];
@@ -102,7 +110,6 @@
 }
 
 - (void)getData {
-    NSLog(@"%@",self.currentNews);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSDictionary *postData = @{@"type":self.currentNews,@"page":@"1"};
     
@@ -179,6 +186,19 @@
     return _newsType;
 }
 
+- (UIView *)coverView {
+    if (!_coverView) {
+        _coverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.tableView.bounds.size.width, self.tableView.bounds.size.height)];
+        _coverView.backgroundColor = [UIColor lightGrayColor];
+        _coverView.alpha = 0.2;
+    }
+    return _coverView;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    id destVC = segue.destinationViewController;
+    [destVC setValue:sender forKey:@"NewsURL"];
+}
 
 #pragma mark tableview
 
@@ -197,5 +217,9 @@
     cell.newsTitle.text = [self.tableData[indexPath.row] objectForKey:@"title"];
     CGSize size = [cell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
     return 1  + size.height;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"shownews" sender:[self.tableData[indexPath.row] objectForKey:@"link"]];
 }
 @end
